@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AI Code Reviewer Banner](https://img.shields.io/badge/AI-Code%20Reviewer-blue?style=for-the-badge&logo=github)
+<img src="./assets/logo.png" alt="AI Code Reviewer Logo" width="600" style="border-radius: 8px;" />
 
 ### 🚀 Review Your GitHub Pull Requests Instantly with AI
 
