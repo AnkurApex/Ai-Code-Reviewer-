@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Code Review Hero Banner](./assets/logo.png)
+<img src="./assets/logo.png" alt="Code Review Hero Banner" width="500" style="border-radius: 10px; margin-bottom: 10px;" />
 
 ![AI Code Reviewer Banner](https://img.shields.io/badge/AI-Code%20Reviewer-blue?style=for-the-badge&logo=github)
 
