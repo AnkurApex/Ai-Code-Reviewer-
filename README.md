@@ -1,8 +1,12 @@
-
+# 🤖 AI Code Reviewer
 
 <div align="center">
 
-<img src="./assets/logo.png" alt="AI Code Reviewer Logo" width="600" style="border-radius: 8px;" />
+![AI Code Reviewer Banner](https://img.shields.io/badge/AI-Code%20Reviewer-blue?style=for-the-badge&logo=github)
+![Hackathon](https://img.shields.io/badge/Hackathon-May%202026-e94560?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Live-00d4aa?style=for-the-badge)
+![Node](https://img.shields.io/badge/Node.js-Express-green?style=for-the-badge&logo=node.js)
+![React](https://img.shields.io/badge/React-Vite-61dafb?style=for-the-badge&logo=react)
 
 ### 🚀 Review Your GitHub Pull Requests Instantly with AI
 
@@ -25,7 +29,7 @@ Developers spend **2–3 hours manually reviewing pull requests**, and critical 
 
 ## 💡 Our Solution
 
-An **AI-powered Code Review Agent** that integrates directly with GitHub, fetches PR diffs automatically, and provides categorized, actionable feedback within seconds — no manual code pasting required.
+An **AI-powered Code Review Agent** that integrates directly with GitHub, fetches PR diffs automatically, and provides categorized, actionable feedback within seconds — **no manual code pasting required.**
 
 ---
 
@@ -34,12 +38,35 @@ An **AI-powered Code Review Agent** that integrates directly with GitHub, fetche
 | Feature | Description |
 |---------|-------------|
 | 🔗 **GitHub PR Integration** | Paste any public GitHub PR URL — app fetches code automatically |
-| 🔴 **Bug Detection** | Logic errors, null checks, anti-patterns with line numbers |
+| 🔴 **Bug Detection** | Logic errors, null checks, anti-patterns with exact line numbers |
 | 🟠 **Security Analysis** | Hardcoded secrets, SQL injection, XSS vulnerabilities |
 | 🟡 **Performance Issues** | Inefficient loops, memory leaks, redundant API calls |
 | 🟢 **Code Suggestions** | Naming conventions, code smells, best practices |
 | 📊 **Quality Score** | 0–100 visual score meter with Excellent/Good/Poor rating |
 | 📋 **PR Summary** | 2–3 line overview of what the PR does |
+| 📁 **PR File Tree** | Visual tree of all changed files with additions/deletions count |
+| 🕐 **Review History** | Last 5 reviews auto-saved — click to re-review instantly |
+| 📋 **Copy Review** | One-click copy of full structured report to clipboard |
+
+---
+
+## 🎥 Demo Video
+
+> 📺 **[Click here to watch the demo](#)** ← YouTube link yahan daalo
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Landing Page
+> Clean interface with GitHub PR URL input and quick-try examples
+
+![Landing Page](./assets/landing.png)
+
+### 📊 Review Results
+> Score meter + PR File Tree + categorized bugs, security, performance cards
+
+![Review Results](./assets/results.png)
 
 ---
 
@@ -47,34 +74,36 @@ An **AI-powered Code Review Agent** that integrates directly with GitHub, fetche
 
 ### Frontend
 - ⚛️ **React.js** + **Vite** — Fast, modern UI
-- 🎨 Custom CSS — Dark theme, responsive design
+- 🎨 **Custom CSS** — Dark theme, fully responsive
 
 ### Backend
 - 🟢 **Node.js** + **Express.js** — REST API server
 - 🤖 **Google Gemini 1.5 Flash** — AI-powered code analysis
-- 🐙 **GitHub REST API v3** — Automatic PR diff fetching
+- 🐙 **GitHub REST API v3** — Automatic PR diff + file tree fetching
 
-### Architecture
+### Architecture Flow
 ```
-User → React Frontend
-     → Node.js Backend
-     → GitHub API (fetch PR diff)
-     → Gemini AI (analyze code)
-     → Categorized JSON response
-     → Results displayed on UI
+User pastes PR URL
+      ↓
+React Frontend → POST /ai/get-review
+      ↓
+Node.js Backend
+      ↓
+GitHub REST API → Fetch PR diff + changed files
+      ↓
+Gemini AI → Analyze code → Return structured JSON
+      ↓
+Frontend renders:
+  📁 File Tree  →  click to jump to file review
+  📊 Score Card →  0-100 quality rating
+  📋 Summary    →  PR overview
+  🔴 Bugs       →  with file + line + fix
+  🟠 Security   →  vulnerabilities
+  🟡 Performance → bottlenecks
+  🟢 Suggestions → improvements
+  📋 Copy Button → clipboard export
+  🕐 History    → localStorage saved
 ```
-
----
-
-## 📸 Screenshots
-
-### 🏠 Landing Page
-> Clean input interface with quick-try PR examples
-![Landing Page](./assets/landing.png)
-
-### 📊 Review Results
-> Score meter + categorized bugs, security, performance cards
-![Review Results](./assets/results.png)
 
 ---
 
@@ -88,7 +117,7 @@ User → React Frontend
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/AnkurApex/Ai-Code-Reviewer-.git
-cd Ai-Code-Reviewer
+cd Ai-Code-Reviewer-
 ```
 
 ### 2. Backend Setup
@@ -97,7 +126,7 @@ cd backend
 npm install
 ```
 
-Create `.env` file in `/backend`:
+Create `.env` file inside `/backend`:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 GITHUB_TOKEN=your_github_token_here
@@ -133,42 +162,64 @@ https://github.com/facebook/react/pull/31195
 ## 📁 Project Structure
 
 ```
-Ai-Code-Reviewer/
-├── assets/                          # README assets (screenshots)
+Ai-Code-Reviewer-/
+├── assets/                            # README screenshots
+│   ├── landing.png
+│   └── results.png
+│
 ├── backend/
 │   ├── src/
 │   │   ├── controllers/
-│   │   │   └── ai.controller.js     # Request handler
+│   │   │   └── ai.controller.js       # Request handler — GitHub + AI jodta hai
 │   │   ├── routes/
-│   │   │   └── ai.routes.js         # API routes
+│   │   │   └── ai.routes.js           # POST /ai/get-review route
 │   │   └── services/
-│   │       ├── ai.service.js        # Gemini AI integration
-│   │       └── github.service.js    # GitHub PR fetching
-│   ├── app.js                       # Express server
+│   │       ├── ai.service.js          # Gemini AI integration + prompt
+│   │       └── github.service.js      # GitHub PR diff + files fetch
+│   ├── app.js                         # Express server entry point
 │   └── package.json
 │
 └── frontend/
     ├── src/
     │   ├── components/
-    │   │   ├── Header.jsx
-    │   │   ├── InputSection.jsx      # PR URL input
-    │   │   ├── ScoreCard.jsx         # Quality score display
-    │   │   ├── ReviewCard.jsx        # Bug/Security/Perf cards
-    │   │   ├── SummaryBox.jsx        # PR summary
-    │   │   └── LoadingSpinner.jsx
+    │   │   ├── Header.jsx             # Top navbar
+    │   │   ├── InputSection.jsx       # PR URL input + submit
+    │   │   ├── LoadingSpinner.jsx     # Loading animation
+    │   │   ├── ScoreCard.jsx          # 0-100 quality score meter
+    │   │   ├── SummaryBox.jsx         # PR overall summary
+    │   │   ├── ReviewCard.jsx         # Bugs/Security/Perf/Suggestions cards
+    │   │   ├── FileTree.jsx           # Changed files tree + click to jump ← NEW
+    │   │   ├── ReviewHistory.jsx      # Past reviews from localStorage ← NEW
+    │   │   └── CopyButton.jsx         # One-click clipboard export ← NEW
     │   ├── services/
-    │   │   └── api.js                # Backend API calls
-    │   └── App.jsx                   # Main component
+    │   │   └── api.js                 # Axios — backend se baat
+    │   └── App.jsx                    # Main component — state management
     └── package.json
 ```
 
 ---
 
+## 🆕 What Makes This Different
+
+Most AI code review tools require you to **manually copy-paste code**. Here's what we do differently:
+
+| Feature | Other Tools | AI Code Reviewer |
+|---------|-------------|-----------------|
+| GitHub Integration | ❌ Manual paste | ✅ Auto PR fetch |
+| File Tree View | ❌ | ✅ Click to jump |
+| Review History | ❌ | ✅ Last 5 saved |
+| Copy to Clipboard | ❌ | ✅ One click |
+| Line Numbers in Bugs | ❌ Rare | ✅ Always |
+| Fix Suggestions | ❌ Generic | ✅ Per issue |
+| Quality Score | ❌ Rare | ✅ 0-100 meter |
+
+---
+
 ## 🔮 Future Scope
 
-- [ ] GitHub OAuth login — review private repositories
-- [ ] Auto-post AI review comments directly on GitHub PR
+- [ ] GitHub OAuth — review private repositories
+- [ ] Auto-post AI review as GitHub PR comment
 - [ ] GitLab & Bitbucket support
-- [ ] Slack / Discord alerts for critical issues
-- [ ] Historical review dashboard
-- [ ] Support for multiple AI models (Claude, GPT-4)
+- [ ] Slack / Discord alerts for critical security issues
+- [ ] PDF export of review report
+- [ ] Multi-model support (Claude, GPT-4)
