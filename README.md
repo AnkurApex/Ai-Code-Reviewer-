@@ -48,9 +48,6 @@ An **AI-powered Code Review Agent** that integrates directly with GitHub, fetche
 
 ---
 
-## 🎥 Demo Video
-
-> 📺 **[Click here to watch the demo](#)** ← YouTube link yahan daalo
 
 ---
 
