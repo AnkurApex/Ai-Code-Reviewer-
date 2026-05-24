@@ -1,4 +1,4 @@
-# 🤖 AI Code Reviewer
+
 
 <div align="center">
 
@@ -87,7 +87,7 @@ User → React Frontend
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/AnkurApex/Ai-Code-Reviewer.git
+git clone https://github.com/AnkurApex/Ai-Code-Reviewer-.git
 cd Ai-Code-Reviewer
 ```
 
