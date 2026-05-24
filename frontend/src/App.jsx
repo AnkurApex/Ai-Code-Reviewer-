@@ -5,7 +5,12 @@ import LoadingSpinner from './components/LoadingSpinner';
 import ScoreCard from './components/ScoreCard';
 import ReviewCard from './components/ReviewCard';
 import SummaryBox from './components/SummaryBox';
+import CopyButton from './components/CopyButton';
+import FileTree from './components/FileTree';
+import ReviewHistory, { saveToHistory } from './components/ReviewHistory';
 import { getCodeReview } from './services/api';
+
+
 
 // ── Decorative background grid ──────────────────────────────────────────────
 const GridBg = () => (
@@ -163,17 +168,26 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [review, setReview] = useState(null);
   const [error, setError] = useState(null);
+  const [currentPrUrl, setCurrentPrUrl] = useState('');
+  const [files, setFiles] = useState([]);         // ← PR files list
 
   const handleReviewSubmit = async (prUrl) => {
     setIsLoading(true);
     setError(null);
     setReview(null);
+    setFiles([]);
+    setCurrentPrUrl(prUrl); // ← URL save karo
 
     try {
       const data = await getCodeReview(prUrl);
       setReview(data.review);
+      setFiles(data.files || []); // ← files save karo
+
+      // ← History mein save karo
+      saveToHistory(prUrl, data.review.score, data.review.summary);
+
     } catch (err) {
-      setError(err.message || 'Something went wrong. Is the backend running?');
+      setError(err.message || 'Kuch toh gadbad hai!');
     } finally {
       setIsLoading(false);
     }
@@ -203,6 +217,9 @@ function App() {
             <InputSection onSubmit={handleReviewSubmit} isLoading={isLoading} />
           )}
 
+          {/* Review History — Input ke neeche, results ke upar */}
+          <ReviewHistory onSelectPR={handleReviewSubmit} />
+
           {/* Loading */}
           {isLoading && <LoadingSpinner />}
 
@@ -215,6 +232,19 @@ function App() {
           {review && !isLoading && (
             <div>
               <ResultsHeader review={review} onReset={handleReset} />
+
+              {/* COPY BUTTON — Review ke upar dikhega */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginBottom: '16px'
+              }}>
+                <CopyButton review={review} prUrl={currentPrUrl} />
+              </div>
+
+              {/* File Tree — Sabse pehle */}
+              <FileTree files={files} />
+
               <ScoreCard score={review.score} />
               <SummaryBox summary={review.summary} />
               <ReviewCard title="Bugs Found"         icon="🔴" color="#f43f5e" items={review.bugs} />

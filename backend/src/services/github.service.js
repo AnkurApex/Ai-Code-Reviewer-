@@ -45,7 +45,9 @@ const fetchPRDiff = async (prUrl) => {
   // Build diff text from changed files
   const files = filesResponse.data.map((file) => ({
     filename: file.filename,
-    status: file.status,
+    status: file.status,       // added / modified / deleted
+    additions: file.additions, // ← naya: kitni lines add hui
+    deletions: file.deletions, // ← naya: kitni lines hati
     patch: file.patch || '',
   }));
 
@@ -53,7 +55,8 @@ const fetchPRDiff = async (prUrl) => {
     .map((f) => `File: ${f.filename} (${f.status})\n${f.patch}`)
     .join('\n\n---\n\n');
 
-  return diffText;
+  // ← Ab dono return karo — diffText aur files list
+  return { diffText, files };
 };
 
 module.exports = { fetchPRDiff };

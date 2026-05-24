@@ -9,9 +9,11 @@ const SEVERITY_MAP = {
 
 const IssueItem = ({ item, color, index }) => {
   const [expanded, setExpanded] = useState(true);
+  const safeId = item.file ? `file-${item.file.replace(/[^a-zA-Z0-9]/g, '-')}` : undefined;
 
   return (
     <div
+      id={safeId}
       className="animate-fadeinup"
       style={{
         animationDelay: `${index * 60}ms`,

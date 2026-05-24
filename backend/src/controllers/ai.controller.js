@@ -6,33 +6,35 @@ const getReview = async (req, res) => {
     const { prUrl } = req.body;
 
     if (!prUrl) {
-      return res.status(400).json({ error: 'PR URL is required.' });
+      return res.status(400).json({ error: 'PR URL required hai!' });
     }
 
     if (!prUrl.includes('github.com')) {
-      return res.status(400).json({ error: 'Only GitHub URLs are supported.' });
+      return res.status(400).json({ error: 'Sirf GitHub URLs supported hain' });
     }
 
-    console.log('Starting PR review:', prUrl);
+    console.log('🔍 Review shuru:', prUrl);
 
-    // Step 1: Fetch diff from GitHub
-    const diffText = await fetchPRDiff(prUrl);
+    // GitHub se diff + files dono lo
+    const { diffText, files } = await fetchPRDiff(prUrl); // ← updated
 
     if (!diffText || diffText.trim() === '') {
-      return res.status(400).json({ error: 'No changes found in this PR.' });
+      return res.status(400).json({ error: 'PR mein koi changes nahi mili' });
     }
 
-    // Step 2: Run AI review
+    console.log('🤖 AI analyze kar raha hai...');
     const review = await getAIReview(diffText);
 
-    // Step 3: Return result
-    console.log('Review complete.');
-    res.json({ success: true, review });
+    console.log('✅ Review complete!');
+
+    // ← files bhi bhej do response mein
+    res.json({ success: true, review, files });
 
   } catch (error) {
-    console.error('Error during review:', error.message);
+    console.error('❌ Error:', error.message);
     res.status(500).json({
-      error: error.message || 'An unexpected error occurred. Please try again.',
+      error: 'Kuch toh gadbad hai. PR URL check karo.',
+      details: error.message
     });
   }
 };
