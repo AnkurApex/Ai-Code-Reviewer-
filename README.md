@@ -2,6 +2,8 @@
 
 <div align="center">
 
+![Code Review Hero Banner](./assets/logo.png)
+
 ![AI Code Reviewer Banner](https://img.shields.io/badge/AI-Code%20Reviewer-blue?style=for-the-badge&logo=github)
 ![Hackathon](https://img.shields.io/badge/Hackathon-May%202026-e94560?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Live-00d4aa?style=for-the-badge)
