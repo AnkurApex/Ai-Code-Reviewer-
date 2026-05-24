@@ -5,10 +5,6 @@
 ![Code Review Hero Banner](./assets/logo.png)
 
 ![AI Code Reviewer Banner](https://img.shields.io/badge/AI-Code%20Reviewer-blue?style=for-the-badge&logo=github)
-![Hackathon](https://img.shields.io/badge/Hackathon-May%202026-e94560?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Live-00d4aa?style=for-the-badge)
-![Node](https://img.shields.io/badge/Node.js-Express-green?style=for-the-badge&logo=node.js)
-![React](https://img.shields.io/badge/React-Vite-61dafb?style=for-the-badge&logo=react)
 
 ### 🚀 Review Your GitHub Pull Requests Instantly with AI
 
